@@ -1,8 +1,10 @@
 import json
 import re
+import logging
+import httpx
 from google import genai
 from google.genai import types
-from pydantic import Field, create_model
+from pydantic import Field, create_model, ValidationError
 from typing import Literal
 from app.schemas import Draft, Verification, Source
 
@@ -34,6 +36,24 @@ class ProviderError(RuntimeError): pass
 class ConfigurationError(RuntimeError): pass
 
 
+
+logger=logging.getLogger(__name__)
+class IncompleteResponse(RuntimeError): pass
+
+def request_json(client,model,contents,config,schema,responses,stage):
+    """One bounded retry for transient service failures or incomplete JSON only."""
+    for attempt in range(2):
+        try:
+            responses.append(None)
+            response=client.models.generate_content(model=model,contents=contents,config=config)
+            responses[-1]=response
+            if not response.text or not response.text.strip(): raise IncompleteResponse("empty response")
+            return schema.model_validate_json(response.text)
+        except Exception as error:
+            transient=isinstance(error,(IncompleteResponse,ValidationError,httpx.TimeoutException,httpx.TransportError)) or getattr(error,"code",None) in {408,500,502,503,504}
+            logger.warning("Gemini %s attempt %s failed: %s, code=%s",stage,attempt+1,type(error).__name__,getattr(error,"code",None))
+            if attempt==1 or not transient: raise
+
 def citation(chunk):
     return Source(source_id=chunk["source_id"],document_id=chunk["document_id"],document_name=chunk["document_name"],
                   source_url=chunk.get("source_url",""),page_start=chunk.get("page_start"),page_end=chunk.get("page_end"),
@@ -52,6 +72,27 @@ def validate_draft(draft,evidence):
         raise ProviderError("لم يُعد النموذج سؤال توضيح صالحاً.")
     return by_id
 
+def source_excerpt_answer(evidence,language,responses):
+    """A failed synthesis must never expose unsupported claims. Show original evidence instead."""
+    academic=[c for c in evidence if c.get("document_id")!="student_profile"]
+    selected=(academic or evidence)[:2]
+    if language=="en":
+        intro="I could not confirm a complete generated answer. Here are the original passages found for your question. Open each source to review the full conditions:"
+        ending="These are source excerpts, not a verified final interpretation or registration decision."
+    else:
+        intro="لم أتمكن من تأكيد صياغة جواب كامل. هذه النصوص الأصلية التي عثر عليها البحث لسؤالك؛ افتح المصادر للاطلاع على الشروط كاملة:"
+        ending="هذه مقتطفات من المصادر، وليست تفسيراً نهائياً مؤكداً أو موافقة تسجيل."
+    blocks=[]
+    for i,c in enumerate(selected,1):
+        text=c["text"]
+        excerpt=text if len(text)<=1800 else text[:1800]+" […]"
+        blocks.append(f"{c['document_name']} [{i}]\n{excerpt}")
+    return {"answer":intro+"\n\n"+"\n\n".join(blocks)+"\n\n"+ending,
+            "status":"partially_answered","sources":[citation(c) for c in selected],"limitations":[ending],
+            "usage":{"calls":len(responses),"claim_check":"original_source_excerpts_only",
+                     "input_tokens":sum(getattr(r.usage_metadata,"prompt_token_count",0) or 0 for r in responses if r is not None),
+                     "output_tokens":sum(getattr(r.usage_metadata,"candidates_token_count",0) or 0 for r in responses if r is not None)}}
+
 class Generator:
     def __init__(self,cfg): self.cfg=cfg
     def generate(self,question,evidence,history,style,report):
@@ -65,29 +106,29 @@ class Generator:
         SourceId=Literal[tuple(aliases)]
         GroundedClaim=create_model("GroundedClaim",text=(str,...),source_ids=(list[SourceId],Field(min_length=1)))
         GroundedDraft=create_model("GroundedDraft",__base__=Draft,claims=(list[GroundedClaim],Field(default_factory=list)))
+        responses=[]
         client=None
         payload={"question":question,"previous_user_questions":history,"answer_style":"شامية فلسطينية مفهومة" if style=="levantine" else "عربية فصحى مبسطة",
                  "context": [{"source_id":reverse[c["source_id"]],"document":c["document_name"],"page":c.get("page_start"),
                               "version":c.get("version"),"verification":c.get("verification_status"),"text":c["text"]} for c in evidence],
                  "known_source_conflicts":report.get("degree_conflicts",[]),
-                 "student_context":report.get("student_context"),"response_language":language,
+                 "student_context_source_id":reverse.get("profile:current"),"response_language":language,
                  "scope":"الخطة المورّدة لهندسة الحاسوب؛ لا توجد عروض فصلية أو موافقات خاصة"}
         try:
-            client=genai.Client(api_key=self.cfg.gemini_api_key,http_options=types.HttpOptions(timeout=self.cfg.gemini_timeout_seconds*1000,retry_options=types.HttpRetryOptions(attempts=1)))
-            response=client.models.generate_content(model=self.cfg.gemini_model,contents=json.dumps(payload,ensure_ascii=False),
-                config=types.GenerateContentConfig(system_instruction=SYSTEM+"\nاعتبر ملف الطالب سياقاً يحدده المستخدم والحسابات نتائج حتمية من الخطة، وليست سياسة جامعية. استخدم المساقات الناجحة المحفوظة عند الإجابة ولا تفترض نجاح غيرها. اشرح المتطلبات غير المستوفاة. عند غياب المتطلب في قائمة الأهلية لا تدّع السماح. استشهد بملف الطالب للحسابات وبالمصدر الأكاديمي للقواعد. لا تجزم بالتخرج عند تعارض مصادر الساعات."+("\nAnswer entirely in clear English. Keep original source quotations unchanged." if language=="en" else ""),temperature=0,thinking_config=types.ThinkingConfig(thinking_level="LOW"),response_mime_type="application/json",response_schema=GroundedDraft))
-            draft=Draft.model_validate_json(response.text)
+            client=genai.Client(api_key=self.cfg.gemini_api_key,http_options=types.HttpOptions(timeout=min(self.cfg.gemini_timeout_seconds,25)*1000,retry_options=types.HttpRetryOptions(attempts=1)))
+            draft=request_json(client,self.cfg.gemini_model,json.dumps(payload,ensure_ascii=False),
+                config=types.GenerateContentConfig(system_instruction=SYSTEM+"\nاعتبر ملف الطالب سياقاً يحدده المستخدم والحسابات نتائج حتمية من الخطة، وليست سياسة جامعية. استخدم المساقات الناجحة المحفوظة عند الإجابة ولا تفترض نجاح غيرها. اشرح المتطلبات غير المستوفاة. عند غياب المتطلب في قائمة الأهلية لا تدّع السماح. استشهد بملف الطالب للحسابات وبالمصدر الأكاديمي للقواعد. لا تجزم بالتخرج عند تعارض مصادر الساعات."+("\nAnswer entirely in clear English. Keep original source quotations unchanged." if language=="en" else ""),temperature=0,thinking_config=types.ThinkingConfig(thinking_level="MINIMAL"),response_mime_type="application/json",response_schema=GroundedDraft,max_output_tokens=4096),schema=Draft,responses=responses,stage="answer")
             for claim in draft.claims:
                 claim.source_ids=[aliases.get(key,key) for key in claim.source_ids]
             by_id=validate_draft(draft,evidence)
             verify_usage=None
             if draft.claims:
-                check=client.models.generate_content(model=self.cfg.gemini_model,
-                    contents=json.dumps({"claims":[{"text":c.text,"source_ids":[reverse[key] for key in c.source_ids]} for c in draft.claims],"evidence":payload["context"]},ensure_ascii=False),
-                    config=types.GenerateContentConfig(system_instruction=VERIFY,temperature=0,thinking_config=types.ThinkingConfig(thinking_level="LOW"),response_mime_type="application/json",response_schema=Verification))
-                verdict=Verification.model_validate_json(check.text);verify_usage=check.usage_metadata
+                referenced={reverse[key] for claim in draft.claims for key in claim.source_ids}
+                verdict=request_json(client,self.cfg.gemini_model,
+                    json.dumps({"claims":[{"text":c.text,"source_ids":[reverse[key] for key in c.source_ids]} for c in draft.claims],"evidence":[c for c in payload["context"] if c["source_id"] in referenced]},ensure_ascii=False),
+                    config=types.GenerateContentConfig(system_instruction=VERIFY,temperature=0,thinking_config=types.ThinkingConfig(thinking_level="MINIMAL"),response_mime_type="application/json",response_schema=Verification,max_output_tokens=768),schema=Verification,responses=responses,stage="support_check")
                 if not verdict.supported or verdict.unsupported_claim_indexes:
-                    raise ProviderError("لم يجتز الجواب فحص دعم الادعاءات بالمصادر. أعد صياغة السؤال أو راجع المصدر.")
+                    return source_excerpt_answer(evidence,language,responses)
             ids=list(dict.fromkeys(s for claim in draft.claims for s in claim.source_ids))
             numbering={key:i+1 for i,key in enumerate(ids)}
             if draft.claims:
@@ -97,16 +138,22 @@ class Generator:
             else: answer=refusal
             if language=="ar" and not re.search(r"[\u0621-\u064a]",answer): raise ProviderError("لم يُعد النموذج جواباً عربياً صالحاً.")
             if language=="en" and draft.status=="out_of_scope": answer="I can help with academic questions grounded in the university documents. What would you like to know?"
-            usage={"model":self.cfg.gemini_model,"calls":2 if draft.claims else 1,
-                   "input_tokens":sum(getattr(u,"prompt_token_count",0) or 0 for u in [response.usage_metadata,verify_usage]),
-                   "output_tokens":sum(getattr(u,"candidates_token_count",0) or 0 for u in [response.usage_metadata,verify_usage]),
+            usage={"model":self.cfg.gemini_model,"calls":len(responses),
+                   "input_tokens":sum(getattr(u,"prompt_token_count",0) or 0 for u in [r.usage_metadata for r in responses if r is not None]),
+                   "output_tokens":sum(getattr(u,"candidates_token_count",0) or 0 for u in [r.usage_metadata for r in responses if r is not None]),
                    "claim_check":"model_checked_not_guaranteed" if draft.claims else "not_applicable"}
             return {"answer":answer,"status":draft.status,"sources":[citation(by_id[s]) for s in ids],
                     "clarification_question":draft.clarification_question,"limitations":["الإجابة محدودة بالأدلة المعروضة؛ راجع الجهة المختصة لتأكيد ما ينطبق على الحالة."],"usage":usage}
         except (ProviderError,ConfigurationError): raise
         except Exception as error:
             code=getattr(error,"code",None)
-            if code==429: message="وصلت خدمة Gemini إلى حد الطلبات. انتظر قليلاً ثم أعد المحاولة."
+            if isinstance(error,(IncompleteResponse,ValidationError,httpx.TimeoutException,httpx.TransportError)) or code in {408,500,502,503,504}:
+                return source_excerpt_answer(evidence,language,responses)
+            if isinstance(error,(IncompleteResponse,ValidationError)):
+                message="وصل رد غير مكتمل من خدمة الإجابات بعد إعادة المحاولة. جرّب إرسال السؤال مجدداً."
+            elif isinstance(error,(httpx.TimeoutException,httpx.TransportError)) or code in {408,500,502,503,504}:
+                message="خدمة الإجابات تتأخر أو غير متاحة مؤقتاً. مساقاتك محفوظة؛ أعد إرسال السؤال بعد قليل."
+            elif code==429: message="وصلت خدمة Gemini إلى حد الطلبات. انتظر قليلاً ثم أعد المحاولة."
             elif code in {400,401,403,404}: message="تحقق من مفتاح Gemini واسم النموذج وصلاحية الوصول في ملف .env."
             else: message="تعذّر الاتصال بخدمة الإجابات أو قراءة استجابتها. أعد المحاولة؛ لم تُنشأ إجابة أكاديمية بديلة."
             raise ProviderError(message) from None

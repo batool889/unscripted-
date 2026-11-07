@@ -29,7 +29,10 @@ def test_grounded_claims_are_checked_and_numbered(monkeypatch):
 
 def test_failed_support_check_is_not_reported_as_absent_evidence(monkeypatch):
     mock_client(monkeypatch,[{"status":"answered","claims":[{"text":"يسمح بثلاثين ساعة.","source_ids":["real:row:2"]}]},{"supported":False,"unsupported_claim_indexes":[0]}])
-    with pytest.raises(ProviderError):Generator(Settings(gemini_api_key='test-not-a-real-key')).generate('سؤال',EVIDENCE,[],'formal',{})
+    result=Generator(Settings(gemini_api_key='test-not-a-real-key')).generate('سؤال',EVIDENCE,[],'formal',{})
+    assert result['status']=='partially_answered'
+    assert 'يسمح بثلاثين' not in result['answer']
+    assert EVIDENCE[0]['text'] in result['answer']
 
 def test_forged_source_fails_before_support_request(monkeypatch):
     calls=mock_client(monkeypatch,[{"status":"answered","claims":[{"text":"ادعاء","source_ids":["fake"]}]}])
@@ -67,3 +70,25 @@ def test_short_source_alias_maps_to_original_citation(monkeypatch):
 def test_empty_evidence_refusal_respects_english():
     result=Generator(Settings(gemini_api_key='test-not-a-real-key')).generate('Question',[],[],'formal',{'response_language':'en'})
     assert result['answer'].startswith('The available documents')
+
+
+def test_transient_timeout_retried_once(monkeypatch):
+    import httpx
+    calls=mock_client(monkeypatch,[httpx.ReadTimeout('timed out'),{'status':'answered','claims':[{'text':'المساق ثلاث ساعات.','source_ids':['S1']}]},{'supported':True,'unsupported_claim_indexes':[]}])
+    result=Generator(Settings(gemini_api_key='test-not-a-real-key')).generate('كم ساعة؟',EVIDENCE,[],'formal',{})
+    assert len(calls)==3 and result['usage']['calls']==3
+    assert result['status']=='answered'
+
+def test_empty_response_retried_once(monkeypatch):
+    calls=mock_client(monkeypatch,[None,{'status':'needs_clarification','clarification_question':'ما المساق المقصود؟','claims':[]}])
+    result=Generator(Settings(gemini_api_key='test-not-a-real-key')).generate('شو؟',EVIDENCE,[],'formal',{})
+    assert len(calls)==2 and result['status']=='needs_clarification'
+
+def test_repeated_timeout_is_bounded_and_clear(monkeypatch):
+    import httpx
+    calls=mock_client(monkeypatch,[httpx.ReadTimeout('secret-test-credential'),httpx.ReadTimeout('secret-test-credential')])
+    result=Generator(Settings(gemini_api_key='test-not-a-real-key')).generate('سؤال',EVIDENCE,[],'formal',{})
+    assert len(calls)==2 and 'secret-test' not in result['answer']
+    assert result['status']=='partially_answered'
+    assert result['usage']['claim_check']=='original_source_excerpts_only'
+    assert EVIDENCE[0]['text'] in result['answer']
