@@ -1,0 +1,23 @@
+{
+  "model": "gemini-3.1-flash-lite",
+  "transport": "actual local FastAPI /api/chat",
+  "checks": [
+    {
+      "question": "شو المتطلب السابق لمساق 10641373؟",
+      "http_status": 200,
+      "status": "answered",
+      "citations": 2,
+      "seconds": 51.8,
+      "review": "Returned prerequisite expression matches supplied parenthesized AND/OR expression. First request includes embedding-model warmup."
+    },
+    {
+      "question": "متى امتحان الخوارزميات الأسبوع القادم؟",
+      "http_status": 200,
+      "status": "insufficient_evidence",
+      "citations": 0,
+      "seconds": 10.6,
+      "review": "Correctly refused unavailable exam date without inventing an answer."
+    }
+  ],
+  "limitations": "Two live smoke cases only, not a full answer-accuracy evaluation."
+}

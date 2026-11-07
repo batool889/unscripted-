@@ -1,0 +1,17 @@
+﻿item,status,decision,notes
+catalog_year,resolved_for_prototype,fixed_current_default,Do not ask plan year; current default university page only.
+degree_credits,resolved,162_total,19 university + 126 major required + 15 major electives + 2 free electives.
+curriculum_table,verified_current_page,all_visible_course_rows,95 prior + 30 additional free elective options; official page 2026-11-07.
+course_prerequisites,largely_verified,official_table_only,Includes AND/OR conditions as published. One repeated lab expression unclear; see prerequisite review_status.
+course_selection_input,specified_not_coded,searchable_passed_course_checklist,Completed courses are assumed passed; user-selected threshold 60%; internship pass/fail.
+earned_credits,specified_not_coded,derive_from_checklist,"Must account for 15 elective and 2 free elective caps, and not double count 0-credit courses."
+min_max_credits,resolved_prototype,12_to_18,Warn below 12; do not allow above 18.
+semester_offerings,skipped,not_filtered,Do not assert any course is offered next semester.
+equivalencies,skipped,none,Not supported by prototype.
+special_approval,skipped,none,Eligibility is not official registration approval. Training elective may require department approval.
+faq_conflicts,skipped,no_resolution,FAQs are supporting references; avoid unsupported answers.
+timetable_conflicts,skipped,none,No section timetable validation.
+ranking,removed,no_priority,Show all eligible courses without ranking.
+official_lab_ambiguity,open,10221115,Official web table repeats 10221102 in OR grouping; no silent assumption.
+course_description_credit_conflict,open,11032102,Published table lists 3 credits; description calls them non-credit.
+production_integration,pending,frontend_backend,Actual checklist and prerequisite evaluation must be implemented; files are data only.

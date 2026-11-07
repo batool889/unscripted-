@@ -1,0 +1,5 @@
+﻿source_id,url,source_type,topics,status,notes
+ce_plan_ar,https://www.najah.edu/ar/academic/undergraduate-programs/program/computer-engineering/study-plan/,official_curriculum,arabic_names_credits_prerequisites_electives,verified_latest_default_page,Fixed latest default plan only; plan effective year not labeled
+undergraduate_faq,https://www.najah.edu/ar/faq/undergraduate/,official_faq,registration_withdrawal_warning_attendance_retake,verified_online,Check against current guide if conflicting
+general_faq,https://www.najah.edu/ar/faq/general/,official_faq,credit_min_and_exceptions,verified_online,18 standard cap; exceptions exceed 18. Prototype intentionally capped
+student_guide_2026_27,https://www.najah.edu/ar/academic/admissions/student-guide-book/,official_pdf_index,academic_regulations,linked_pdf_not_fully_extracted,2026-2027 PDF 36MB; needs extraction for full rule coverage

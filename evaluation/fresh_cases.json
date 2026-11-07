@@ -1,0 +1,84 @@
+[
+  {
+    "id": "fresh-project-one",
+    "question": "شو لازم أنجح قبل مشروع التخرج 10636581؟",
+    "category": "palestinian",
+    "expected_status": "answered",
+    "evidence_groups": [
+      [
+        {
+          "kind": "computer_engineering_courses",
+          "record_key": "10636581"
+        },
+        {
+          "kind": "prerequisites",
+          "record_key": "10636581"
+        }
+      ]
+    ],
+    "essential_facts": [
+      "10636410"
+    ]
+  },
+  {
+    "id": "fresh-arabic-digits",
+    "question": "كم ساعة لمساق ١٠٢١١١٠٢ وشو اسمه؟",
+    "category": "numerals",
+    "expected_status": "answered",
+    "evidence_groups": [
+      [
+        {
+          "kind": "computer_engineering_courses",
+          "record_key": "10211102"
+        }
+      ]
+    ],
+    "essential_facts": [
+      "مطابقة الرمز بالأرقام العربية"
+    ]
+  },
+  {
+    "id": "fresh-double-count",
+    "question": "هل يجوز احتساب نفس المساق لمتطلبين مختلفين في الخطة؟",
+    "category": "formal",
+    "expected_status": "answered",
+    "evidence_groups": [
+      [
+        {
+          "kind": "pdf",
+          "page_start": 76
+        }
+      ]
+    ],
+    "essential_facts": [
+      "لا يحتسب المساق لأكثر من متطلب"
+    ]
+  },
+  {
+    "id": "fresh-pass",
+    "question": "ما الحد الأدنى لعلامة النجاح في المساق وفق دليل الطالب؟",
+    "category": "formal",
+    "expected_status": "answered",
+    "evidence_groups": [
+      [
+        {
+          "kind": "pdf",
+          "page_start": 81
+        }
+      ]
+    ],
+    "essential_facts": [
+      "60% وفق شروط البرنامج"
+    ]
+  },
+  {
+    "id": "fresh-personal",
+    "question": "قديش ضايل علي للتخرج وأنا ما حكيتلك شو خلصت؟",
+    "category": "missing_context",
+    "expected_status": "needs_clarification",
+    "evidence_groups": [],
+    "essential_facts": [
+      "عدم اختراع سجل شخصي"
+    ]
+  }
+]

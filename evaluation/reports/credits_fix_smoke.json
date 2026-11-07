@@ -1,0 +1,22 @@
+[
+  {
+    "language": "ar",
+    "http_status": 200,
+    "status": "partially_answered",
+    "remaining": 140,
+    "citations": 3,
+    "seconds": 0.0
+  },
+  {
+    "language": "en",
+    "http_status": 200,
+    "status": "partially_answered",
+    "remaining": 140,
+    "citations": 3,
+    "seconds": 0.0
+  },
+  {
+    "live_citation_check": "answered",
+    "citations": 2
+  }
+]

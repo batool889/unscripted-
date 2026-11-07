@@ -1,0 +1,271 @@
+[
+  {
+    "id": "withdrawal-formal",
+    "question": "ما شروط سحب مساق في الفصل العادي؟",
+    "category": "formal",
+    "expected_status": "answered",
+    "evidence_groups": [
+      [
+        {
+          "kind": "pdf",
+          "page_start": 85
+        }
+      ],
+      [
+        {
+          "kind": "pdf",
+          "page_start": 78
+        }
+      ]
+    ],
+    "essential_facts": [
+      "قبل نهاية الأسبوع الثاني عشر",
+      "شروط الحد الأدنى للعبء والاستثناءات"
+    ],
+    "assumptions": "جامعة النجاح؛ الخطة المورّدة، وليس إثبات أهلية طالب حقيقي"
+  },
+  {
+    "id": "withdrawal-palestinian",
+    "question": "بدي اسحب مادة هالفصل، شو الشروط؟",
+    "category": "palestinian",
+    "expected_status": "answered",
+    "evidence_groups": [
+      [
+        {
+          "kind": "pdf",
+          "page_start": 85
+        }
+      ],
+      [
+        {
+          "kind": "pdf",
+          "page_start": 78
+        }
+      ]
+    ],
+    "essential_facts": [],
+    "assumptions": "جامعة النجاح؛ الخطة المورّدة، وليس إثبات أهلية طالب حقيقي"
+  },
+  {
+    "id": "attendance-formal",
+    "question": "ما عواقب تجاوز الغياب دون عذر مقبول؟",
+    "category": "formal",
+    "expected_status": "answered",
+    "evidence_groups": [
+      [
+        {
+          "kind": "pdf",
+          "page_start": 79
+        }
+      ]
+    ],
+    "essential_facts": [
+      "12.5%",
+      "الحرمان من الامتحان وفق الشروط"
+    ],
+    "assumptions": "جامعة النجاح؛ الخطة المورّدة، وليس إثبات أهلية طالب حقيقي"
+  },
+  {
+    "id": "attendance-levantine",
+    "question": "إذا غبت أكثر من المسموح، شو بصير؟",
+    "category": "levantine",
+    "expected_status": "answered",
+    "evidence_groups": [
+      [
+        {
+          "kind": "pdf",
+          "page_start": 79
+        }
+      ]
+    ],
+    "essential_facts": [],
+    "assumptions": "جامعة النجاح؛ الخطة المورّدة، وليس إثبات أهلية طالب حقيقي"
+  },
+  {
+    "id": "repeat",
+    "question": "إذا أعدت مساق رسبت فيه، كيف بتنحسب العلامة والساعات؟",
+    "category": "palestinian",
+    "expected_status": "answered",
+    "evidence_groups": [
+      [
+        {
+          "kind": "pdf",
+          "page_start": 84
+        }
+      ]
+    ],
+    "essential_facts": [
+      "العلامة الأعلى",
+      "الساعات مرة واحدة"
+    ],
+    "assumptions": "جامعة النجاح؛ الخطة المورّدة، وليس إثبات أهلية طالب حقيقي"
+  },
+  {
+    "id": "deferment",
+    "question": "كيف أؤجل دراستي وما مدة التأجيل؟",
+    "category": "formal",
+    "expected_status": "answered",
+    "evidence_groups": [
+      [
+        {
+          "kind": "pdf",
+          "page_start": 86
+        }
+      ]
+    ],
+    "essential_facts": [],
+    "assumptions": "جامعة النجاح؛ الخطة المورّدة، وليس إثبات أهلية طالب حقيقي"
+  },
+  {
+    "id": "minimum-load",
+    "question": "هل يمكن تسجيل أقل من 12 ساعة في الفصل العادي؟",
+    "category": "formal",
+    "expected_status": "answered",
+    "evidence_groups": [
+      [
+        {
+          "kind": "pdf",
+          "page_start": 78
+        }
+      ]
+    ],
+    "essential_facts": [
+      "الاستثناءات والموافقات"
+    ],
+    "assumptions": "جامعة النجاح؛ الخطة المورّدة، وليس إثبات أهلية طالب حقيقي"
+  },
+  {
+    "id": "prerequisite-code",
+    "question": "شو المتطلب السابق لمساق 10641373؟",
+    "category": "palestinian",
+    "expected_status": "answered",
+    "evidence_groups": [
+      [
+        {
+          "kind": "computer_engineering_courses",
+          "record_key": "10641373"
+        },
+        {
+          "kind": "prerequisites",
+          "record_key": "10641373"
+        }
+      ]
+    ],
+    "essential_facts": [
+      "(10221231 OR 10641211) AND (10221253 OR 10641211)"
+    ],
+    "assumptions": "جامعة النجاح؛ الخطة المورّدة، وليس إثبات أهلية طالب حقيقي"
+  },
+  {
+    "id": "project-two",
+    "question": "What is the prerequisite for Graduation Project II 10636582؟",
+    "category": "mixed",
+    "expected_status": "answered",
+    "evidence_groups": [
+      [
+        {
+          "kind": "computer_engineering_courses",
+          "record_key": "10636582"
+        },
+        {
+          "kind": "prerequisites",
+          "record_key": "10636582"
+        }
+      ]
+    ],
+    "essential_facts": [
+      "10636410",
+      "لا يُخترع متطلب المشروع الأول"
+    ],
+    "assumptions": "جامعة النجاح؛ الخطة المورّدة، وليس إثبات أهلية طالب حقيقي"
+  },
+  {
+    "id": "course-hours",
+    "question": "كم ساعة معتمدة لمساق 10211102؟",
+    "category": "exact",
+    "expected_status": "answered",
+    "evidence_groups": [
+      [
+        {
+          "kind": "computer_engineering_courses",
+          "record_key": "10211102"
+        }
+      ]
+    ],
+    "essential_facts": [],
+    "assumptions": "جامعة النجاح؛ الخطة المورّدة، وليس إثبات أهلية طالب حقيقي"
+  },
+  {
+    "id": "degree-conflict",
+    "question": "كم مجموع ساعات التخرج لهندسة الحاسوب؟",
+    "category": "conflict",
+    "expected_status": "conflicting_sources",
+    "evidence_groups": [
+      [
+        {
+          "kind": "degree_requirements",
+          "record_key": "total_credit_hours"
+        }
+      ],
+      [
+        {
+          "kind": "pdf",
+          "page_start": 47
+        }
+      ]
+    ],
+    "essential_facts": [
+      "162 مقابل 163",
+      "لا حسم دون تأكيد الخطة"
+    ],
+    "assumptions": "جامعة النجاح؛ الخطة المورّدة، وليس إثبات أهلية طالب حقيقي"
+  },
+  {
+    "id": "ambiguity",
+    "question": "بقدر أسجّلها؟",
+    "category": "clarification",
+    "expected_status": "needs_clarification",
+    "evidence_groups": [],
+    "essential_facts": [],
+    "assumptions": "جامعة النجاح؛ الخطة المورّدة، وليس إثبات أهلية طالب حقيقي"
+  },
+  {
+    "id": "unknown-exam",
+    "question": "متى امتحان الخوارزميات الأسبوع القادم؟",
+    "category": "missing",
+    "expected_status": "insufficient_evidence",
+    "evidence_groups": [],
+    "essential_facts": [],
+    "assumptions": "جامعة النجاح؛ الخطة المورّدة، وليس إثبات أهلية طالب حقيقي"
+  },
+  {
+    "id": "out-of-scope",
+    "question": "اكتبلي قصيدة عن القمر",
+    "category": "scope",
+    "expected_status": "out_of_scope",
+    "evidence_groups": [],
+    "essential_facts": [],
+    "assumptions": "جامعة النجاح؛ الخطة المورّدة، وليس إثبات أهلية طالب حقيقي"
+  },
+  {
+    "id": "followup",
+    "question": "طيب وإذا كان الفصل صيفي؟",
+    "category": "followup",
+    "expected_status": "answered",
+    "evidence_groups": [
+      [
+        {
+          "kind": "pdf",
+          "page_start": 85
+        }
+      ]
+    ],
+    "essential_facts": [
+      "ستة أسابيع للسحب بحسب المادة وبشروطها"
+    ],
+    "assumptions": "جامعة النجاح؛ الخطة المورّدة، وليس إثبات أهلية طالب حقيقي",
+    "history": [
+      "ما شروط سحب مساق في الفصل العادي؟"
+    ]
+  }
+]

@@ -1,0 +1,606 @@
+{
+  "split": "fresh",
+  "created_at": "2026-11-07T11:40:21.679704+00:00",
+  "semantic_index": true,
+  "summary": {
+    "lexical": {
+      "mean_evidence_group_recall_at_k": 1.0,
+      "scored_questions": 4,
+      "k": 8
+    },
+    "hybrid": {
+      "mean_evidence_group_recall_at_k": 1.0,
+      "scored_questions": 4,
+      "k": 8
+    }
+  },
+  "live_generation": false,
+  "results": [
+    {
+      "id": "fresh-project-one",
+      "category": "palestinian",
+      "question": "شو لازم أنجح قبل مشروع التخرج 10636581؟",
+      "expected_status": "answered",
+      "lexical": {
+        "evidence_group_recall_at_k": 1.0,
+        "reciprocal_rank": 0.3333333333333333,
+        "seconds": 0.001,
+        "retrieved": [
+          {
+            "id": "degree_requirements-5c697ed0:r2:c0",
+            "kind": "degree_requirements",
+            "page": null,
+            "record": "total_credit_hours"
+          },
+          {
+            "id": "dlyl_ltlb_25-b82034b3:p47:s0:c0",
+            "kind": "pdf",
+            "page": 47,
+            "record": ""
+          },
+          {
+            "id": "computer_engineering_courses-7ced2a81:r50:c0",
+            "kind": "computer_engineering_courses",
+            "page": null,
+            "record": "10636581"
+          },
+          {
+            "id": "prerequisites-e7b57791:r33:c0",
+            "kind": "prerequisites",
+            "page": null,
+            "record": "10636581"
+          },
+          {
+            "id": "degree_requirements-5c697ed0:r3:c0",
+            "kind": "degree_requirements",
+            "page": null,
+            "record": "university_required"
+          },
+          {
+            "id": "degree_requirements-5c697ed0:r4:c0",
+            "kind": "degree_requirements",
+            "page": null,
+            "record": "speciality_required"
+          },
+          {
+            "id": "degree_requirements-5c697ed0:r5:c0",
+            "kind": "degree_requirements",
+            "page": null,
+            "record": "speciality_elective"
+          },
+          {
+            "id": "degree_requirements-5c697ed0:r6:c0",
+            "kind": "degree_requirements",
+            "page": null,
+            "record": "free_elective"
+          }
+        ]
+      },
+      "hybrid": {
+        "evidence_group_recall_at_k": 1.0,
+        "reciprocal_rank": 0.3333333333333333,
+        "seconds": 5.228,
+        "retrieved": [
+          {
+            "id": "degree_requirements-5c697ed0:r2:c0",
+            "kind": "degree_requirements",
+            "page": null,
+            "record": "total_credit_hours"
+          },
+          {
+            "id": "dlyl_ltlb_25-b82034b3:p47:s0:c0",
+            "kind": "pdf",
+            "page": 47,
+            "record": ""
+          },
+          {
+            "id": "computer_engineering_courses-7ced2a81:r50:c0",
+            "kind": "computer_engineering_courses",
+            "page": null,
+            "record": "10636581"
+          },
+          {
+            "id": "prerequisites-e7b57791:r33:c0",
+            "kind": "prerequisites",
+            "page": null,
+            "record": "10636581"
+          },
+          {
+            "id": "degree_requirements-5c697ed0:r3:c0",
+            "kind": "degree_requirements",
+            "page": null,
+            "record": "university_required"
+          },
+          {
+            "id": "degree_requirements-5c697ed0:r4:c0",
+            "kind": "degree_requirements",
+            "page": null,
+            "record": "speciality_required"
+          },
+          {
+            "id": "degree_requirements-5c697ed0:r5:c0",
+            "kind": "degree_requirements",
+            "page": null,
+            "record": "speciality_elective"
+          },
+          {
+            "id": "prerequisites-e7b57791:r34:c0",
+            "kind": "prerequisites",
+            "page": null,
+            "record": "10636582"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fresh-arabic-digits",
+      "category": "numerals",
+      "question": "كم ساعة لمساق ١٠٢١١١٠٢ وشو اسمه؟",
+      "expected_status": "answered",
+      "lexical": {
+        "evidence_group_recall_at_k": 1.0,
+        "reciprocal_rank": 1.0,
+        "seconds": 0.001,
+        "retrieved": [
+          {
+            "id": "computer_engineering_courses-7ced2a81:r12:c0",
+            "kind": "computer_engineering_courses",
+            "page": null,
+            "record": "10211102"
+          },
+          {
+            "id": "prerequisites-e7b57791:r2:c0",
+            "kind": "prerequisites",
+            "page": null,
+            "record": "10211102"
+          },
+          {
+            "id": "dlyl_ltlb_25-b82034b3:p76:s0:c0",
+            "kind": "pdf",
+            "page": 76,
+            "record": ""
+          },
+          {
+            "id": "prerequisites-e7b57791:r3:c0",
+            "kind": "prerequisites",
+            "page": null,
+            "record": "10211201"
+          },
+          {
+            "id": "dlyl_ltlb_25-b82034b3:p47:s0:c0",
+            "kind": "pdf",
+            "page": 47,
+            "record": ""
+          },
+          {
+            "id": "dlyl_ltlb_25-b82034b3:p52:s0:c0",
+            "kind": "pdf",
+            "page": 52,
+            "record": ""
+          },
+          {
+            "id": "dlyl_ltlb_25-b82034b3:p63:s0:c0",
+            "kind": "pdf",
+            "page": 63,
+            "record": ""
+          },
+          {
+            "id": "dlyl_ltlb_25-b82034b3:p37:s0:c0",
+            "kind": "pdf",
+            "page": 37,
+            "record": ""
+          }
+        ]
+      },
+      "hybrid": {
+        "evidence_group_recall_at_k": 1.0,
+        "reciprocal_rank": 1.0,
+        "seconds": 0.055,
+        "retrieved": [
+          {
+            "id": "computer_engineering_courses-7ced2a81:r12:c0",
+            "kind": "computer_engineering_courses",
+            "page": null,
+            "record": "10211102"
+          },
+          {
+            "id": "prerequisites-e7b57791:r2:c0",
+            "kind": "prerequisites",
+            "page": null,
+            "record": "10211102"
+          },
+          {
+            "id": "computer_engineering_courses-7ced2a81:r13:c0",
+            "kind": "computer_engineering_courses",
+            "page": null,
+            "record": "10211201"
+          },
+          {
+            "id": "computer_engineering_courses-7ced2a81:r17:c0",
+            "kind": "computer_engineering_courses",
+            "page": null,
+            "record": "10221102"
+          },
+          {
+            "id": "dlyl_ltlb_25-b82034b3:p76:s0:c0",
+            "kind": "pdf",
+            "page": 76,
+            "record": ""
+          },
+          {
+            "id": "computer_engineering_courses-7ced2a81:r11:c0",
+            "kind": "computer_engineering_courses",
+            "page": null,
+            "record": "10211101"
+          },
+          {
+            "id": "prerequisites-e7b57791:r3:c0",
+            "kind": "prerequisites",
+            "page": null,
+            "record": "10211201"
+          },
+          {
+            "id": "computer_engineering_courses-7ced2a81:r122:c0",
+            "kind": "computer_engineering_courses",
+            "page": null,
+            "record": "11221102"
+          }
+        ]
+      }
+    },
+    {
+      "id": "fresh-double-count",
+      "category": "formal",
+      "question": "هل يجوز احتساب نفس المساق لمتطلبين مختلفين في الخطة؟",
+      "expected_status": "answered",
+      "lexical": {
+        "evidence_group_recall_at_k": 1.0,
+        "reciprocal_rank": 0.25,
+        "seconds": 0.001,
+        "retrieved": [
+          {
+            "id": "dlyl_ltlb_25-b82034b3:p84:s1:c0",
+            "kind": "pdf",
+            "page": 84,
+            "record": ""
+          },
+          {
+            "id": "dlyl_ltlb_25-b82034b3:p73:s0:c0",
+            "kind": "pdf",
+            "page": 73,
+            "record": ""
+          },
+          {
+            "id": "dlyl_ltlb_25-b82034b3:p89:s0:c1",
+            "kind": "pdf",
+            "page": 89,
+            "record": ""
+          },
+          {
+            "id": "dlyl_ltlb_25-b82034b3:p76:s1:c0",
+            "kind": "pdf",
+            "page": 76,
+            "record": ""
+          },
+          {
+            "id": "dlyl_ltlb_25-b82034b3:p90:s1:c2",
+            "kind": "pdf",
+            "page": 90,
+            "record": ""
+          },
+          {
+            "id": "dlyl_ltlb_25-b82034b3:p98:s0:c1",
+            "kind": "pdf",
+            "page": 98,
+            "record": ""
+          },
+          {
+            "id": "dlyl_ltlb_25-b82034b3:p109:s0:c0",
+            "kind": "pdf",
+            "page": 109,
+            "record": ""
+          },
+          {
+            "id": "dlyl_ltlb_25-b82034b3:p92:s0:c0",
+            "kind": "pdf",
+            "page": 92,
+            "record": ""
+          }
+        ]
+      },
+      "hybrid": {
+        "evidence_group_recall_at_k": 1.0,
+        "reciprocal_rank": 1.0,
+        "seconds": 0.066,
+        "retrieved": [
+          {
+            "id": "dlyl_ltlb_25-b82034b3:p76:s1:c0",
+            "kind": "pdf",
+            "page": 76,
+            "record": ""
+          },
+          {
+            "id": "dlyl_ltlb_25-b82034b3:p84:s1:c0",
+            "kind": "pdf",
+            "page": 84,
+            "record": ""
+          },
+          {
+            "id": "dlyl_ltlb_25-b82034b3:p89:s0:c1",
+            "kind": "pdf",
+            "page": 89,
+            "record": ""
+          },
+          {
+            "id": "dlyl_ltlb_25-b82034b3:p92:s0:c0",
+            "kind": "pdf",
+            "page": 92,
+            "record": ""
+          },
+          {
+            "id": "dlyl_ltlb_25-b82034b3:p90:s1:c2",
+            "kind": "pdf",
+            "page": 90,
+            "record": ""
+          },
+          {
+            "id": "dlyl_ltlb_25-b82034b3:p91:s1:c0",
+            "kind": "pdf",
+            "page": 91,
+            "record": ""
+          },
+          {
+            "id": "dlyl_ltlb_25-b82034b3:p73:s0:c0",
+            "kind": "pdf",
+            "page": 73,
+            "record": ""
+          },
+          {
+            "id": "dlyl_ltlb_25-b82034b3:p98:s0:c1",
+            "kind": "pdf",
+            "page": 98,
+            "record": ""
+          }
+        ]
+      }
+    },
+    {
+      "id": "fresh-pass",
+      "category": "formal",
+      "question": "ما الحد الأدنى لعلامة النجاح في المساق وفق دليل الطالب؟",
+      "expected_status": "answered",
+      "lexical": {
+        "evidence_group_recall_at_k": 1.0,
+        "reciprocal_rank": 0.5,
+        "seconds": 0.002,
+        "retrieved": [
+          {
+            "id": "academic_faq-5bdef7ab:r4:c0",
+            "kind": "academic_faq",
+            "page": null,
+            "record": "withdrawal"
+          },
+          {
+            "id": "dlyl_ltlb_25-b82034b3:p81:s0:c0",
+            "kind": "pdf",
+            "page": 81,
+            "record": ""
+          },
+          {
+            "id": "dlyl_ltlb_25-b82034b3:p73:s0:c0",
+            "kind": "pdf",
+            "page": 73,
+            "record": ""
+          },
+          {
+            "id": "dlyl_ltlb_25-b82034b3:p79:s1:c0",
+            "kind": "pdf",
+            "page": 79,
+            "record": ""
+          },
+          {
+            "id": "dlyl_ltlb_25-b82034b3:p86:s1:c3",
+            "kind": "pdf",
+            "page": 86,
+            "record": ""
+          },
+          {
+            "id": "dlyl_ltlb_25-b82034b3:p103:s0:c2",
+            "kind": "pdf",
+            "page": 103,
+            "record": ""
+          },
+          {
+            "id": "dlyl_ltlb_25-b82034b3:p76:s1:c0",
+            "kind": "pdf",
+            "page": 76,
+            "record": ""
+          },
+          {
+            "id": "dlyl_ltlb_25-b82034b3:p80:s1:c2",
+            "kind": "pdf",
+            "page": 80,
+            "record": ""
+          }
+        ]
+      },
+      "hybrid": {
+        "evidence_group_recall_at_k": 1.0,
+        "reciprocal_rank": 1.0,
+        "seconds": 0.073,
+        "retrieved": [
+          {
+            "id": "dlyl_ltlb_25-b82034b3:p81:s0:c0",
+            "kind": "pdf",
+            "page": 81,
+            "record": ""
+          },
+          {
+            "id": "dlyl_ltlb_25-b82034b3:p103:s0:c2",
+            "kind": "pdf",
+            "page": 103,
+            "record": ""
+          },
+          {
+            "id": "dlyl_ltlb_25-b82034b3:p79:s1:c0",
+            "kind": "pdf",
+            "page": 79,
+            "record": ""
+          },
+          {
+            "id": "dlyl_ltlb_25-b82034b3:p95:s1:c0",
+            "kind": "pdf",
+            "page": 95,
+            "record": ""
+          },
+          {
+            "id": "dlyl_ltlb_25-b82034b3:p76:s1:c0",
+            "kind": "pdf",
+            "page": 76,
+            "record": ""
+          },
+          {
+            "id": "academic_faq-5bdef7ab:r4:c0",
+            "kind": "academic_faq",
+            "page": null,
+            "record": "withdrawal"
+          },
+          {
+            "id": "dlyl_ltlb_25-b82034b3:p98:s0:c0",
+            "kind": "pdf",
+            "page": 98,
+            "record": ""
+          },
+          {
+            "id": "dlyl_ltlb_25-b82034b3:p73:s0:c0",
+            "kind": "pdf",
+            "page": 73,
+            "record": ""
+          }
+        ]
+      }
+    },
+    {
+      "id": "fresh-personal",
+      "category": "missing_context",
+      "question": "قديش ضايل علي للتخرج وأنا ما حكيتلك شو خلصت؟",
+      "expected_status": "needs_clarification",
+      "lexical": {
+        "evidence_group_recall_at_k": null,
+        "reciprocal_rank": null,
+        "seconds": 0.003,
+        "retrieved": [
+          {
+            "id": "degree_requirements-5c697ed0:r2:c0",
+            "kind": "degree_requirements",
+            "page": null,
+            "record": "total_credit_hours"
+          },
+          {
+            "id": "dlyl_ltlb_25-b82034b3:p47:s0:c0",
+            "kind": "pdf",
+            "page": 47,
+            "record": ""
+          },
+          {
+            "id": "dlyl_ltlb_25-b82034b3:p78:s0:c2",
+            "kind": "pdf",
+            "page": 78,
+            "record": ""
+          },
+          {
+            "id": "degree_requirements-5c697ed0:r3:c0",
+            "kind": "degree_requirements",
+            "page": null,
+            "record": "university_required"
+          },
+          {
+            "id": "degree_requirements-5c697ed0:r4:c0",
+            "kind": "degree_requirements",
+            "page": null,
+            "record": "speciality_required"
+          },
+          {
+            "id": "dlyl_ltlb_25-b82034b3:p84:s1:c0",
+            "kind": "pdf",
+            "page": 84,
+            "record": ""
+          },
+          {
+            "id": "degree_requirements-5c697ed0:r5:c0",
+            "kind": "degree_requirements",
+            "page": null,
+            "record": "speciality_elective"
+          },
+          {
+            "id": "degree_requirements-5c697ed0:r6:c0",
+            "kind": "degree_requirements",
+            "page": null,
+            "record": "free_elective"
+          }
+        ]
+      },
+      "hybrid": {
+        "evidence_group_recall_at_k": null,
+        "reciprocal_rank": null,
+        "seconds": 0.217,
+        "retrieved": [
+          {
+            "id": "degree_requirements-5c697ed0:r2:c0",
+            "kind": "degree_requirements",
+            "page": null,
+            "record": "total_credit_hours"
+          },
+          {
+            "id": "dlyl_ltlb_25-b82034b3:p47:s0:c0",
+            "kind": "pdf",
+            "page": 47,
+            "record": ""
+          },
+          {
+            "id": "dlyl_ltlb_25-b82034b3:p78:s0:c0",
+            "kind": "pdf",
+            "page": 78,
+            "record": ""
+          },
+          {
+            "id": "dlyl_ltlb_25-b82034b3:p92:s1:c1",
+            "kind": "pdf",
+            "page": 92,
+            "record": ""
+          },
+          {
+            "id": "dlyl_ltlb_25-b82034b3:p92:s0:c0",
+            "kind": "pdf",
+            "page": 92,
+            "record": ""
+          },
+          {
+            "id": "dlyl_ltlb_25-b82034b3:p91:s1:c0",
+            "kind": "pdf",
+            "page": 91,
+            "record": ""
+          },
+          {
+            "id": "dlyl_ltlb_25-b82034b3:p83:s1:c3",
+            "kind": "pdf",
+            "page": 83,
+            "record": ""
+          },
+          {
+            "id": "dlyl_ltlb_25-b82034b3:p129:s0:c1",
+            "kind": "pdf",
+            "page": 129,
+            "record": ""
+          }
+        ]
+      }
+    }
+  ],
+  "limitations": [
+    "Evidence groups identify document pages/records, not every relevant chunk.",
+    "Lexical baseline includes the same exact-code and documented conflict routing as hybrid.",
+    "No answer correctness or refusal score is established by retrieval alone.",
+    "LLM support checking is not a guarantee; manual review is still required."
+  ]
+}

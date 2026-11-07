@@ -1,0 +1,16 @@
+﻿rule_id,value,scope,authority,notes,source_url
+min_credits,12,regular_semester,university_FAQ_and_user_prototype,Minimum ordinary semester credit load,https://www.najah.edu/ar/faq/general/
+max_credits_prototype,18,regular_semester,user_selected_prototype,Cap recommendations at 18 even though official exceptional loads may exceed 18,https://www.najah.edu/ar/faq/general/
+below_minimum_action,warn_consult_dean,regular_semester,user_selected_prototype,Warn below 12 credits; do not block results,
+academic_year_selection,fixed_latest,all,user_selected_prototype,Never ask students to select plan year,
+offerings_filter,disabled,all,user_selected_prototype,Eligibility only; no claims about course offerings,
+graduate_credit_total,162,all,official_plan,Use 162 with category completion checks,https://www.najah.edu/ar/academic/undergraduate-programs/program/computer-engineering/study-plan/
+withdrawal,before_end_week_12,regular_semester,official_faq_check_guide,May withdraw with W subject to academic load rules,https://www.najah.edu/ar/faq/undergraduate/
+academic_warning_gpa,below_1.7,all,official_faq_check_guide,FAQ says warning at GPA below 1.7,https://www.najah.edu/ar/faq/undergraduate/
+numeric_passing_grade,60,numeric_graded_courses,user_selected_prototype,Prototype user-supplied: grade >=60% means completed; student checklist denotes already passed courses.,
+internship_grading,pass_fail,internship_courses,user_selected_prototype,Prototype user-supplied: internship marked completed only when passed; no numeric mark required.,
+completion_input,completed_courses_checklist,all,user_selected_prototype,Student marks successfully completed courses by Arabic name/code; no grade entry required; frontend should offer searchable checklist.,
+earned_credits,sum_selected_passed_courses,all,user_selected_prototype,"Calculated automatically, no separate total credit input. Account for elective category limits and 0-credit courses.",
+course_recommendation,show_all_not_completed_with_satisfied_prerequisites,all,user_selected_prototype,"No ranking, no semester offerings, no timetable; student chooses eligible courses.",
+source_for_course_rules,official_course_table_only,all,user_selected_prototype,Do not ingest prerequisite arrows from unofficial diagram.,https://www.najah.edu/ar/academic/undergraduate-programs/program/computer-engineering/study-plan/
+under_12_action,warn_consult_dean,chosen_course_load,user_selected_prototype,Warning when selected load is below 12.,
